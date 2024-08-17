@@ -1,16 +1,29 @@
 // GENERACIÓN DE CONTRASEÑAS
 
 function generatePassword(length) {
-    var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const minLength = 8;
+    length = Math.max(length, minLength);
+
+    const upperCaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lowerCaseChars = 'abcdefghijklmnopqrstuvwxyz';
+    const numbers = '0123456789';
+    const specialChars = '!@#$%^&*()-_=+[]{}|;:,.<>?';
+
     var password = "";
-    for (var i = 0; i < length; i++) {
-        password += charset.charAt(Math.floor(Math.random() * charset.length));
+    password += upperCaseChars.charAt(Math.floor(Math.random() * upperCaseChars.length));
+    password += lowerCaseChars.charAt(Math.floor(Math.random() * lowerCaseChars.length));
+    password += numbers.charAt(Math.floor(Math.random() * numbers.length));
+    password += specialChars.charAt(Math.floor(Math.random() * specialChars.length));
+
+    const allChars = upperCaseChars + lowerCaseChars + numbers + specialChars;
+    for (let i = password.length; i < length; i++) {
+        password += allChars.charAt(Math.floor(Math.random() * allChars.length));
     }
-    console.log(password);
+    console.log(password.split('').sort(() => Math.random() - 0.5).join(''));
 }
 
-generatePassword(8); 
-generatePassword(8);
+generatePassword(12); 
+generatePassword(4);
 
 // BÚSQUEDA DEL MÁS VIEJO
 
@@ -23,6 +36,7 @@ function findTheOldest(people){
         }
     }
     console.log(oldest);
+    return oldest;
 }
 
 const people = [

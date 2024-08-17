@@ -1,8 +1,11 @@
+// LOS QUE MUESTRAN EL RESULTADO EN EL DOC HTML, LO HACEN TRAS INGRESAR TODOS LOS DATOS DE LOS PROMPTS
 // MANIPULACIÓN DE CADENAS
 
 function repeatString ( texto, repeticiones){
-    for (i=0; i<repeticiones; i++){
-        console.log(texto);
+    for (let i=0; i<repeticiones; i++){
+        const p = document.createElement("p");
+        p.textContent = texto;
+        document.body.appendChild(p);
     }
 }
 
@@ -11,7 +14,10 @@ let repeticiones = parseInt(prompt("Ingrese la cantidad de veces que desea repet
 repeatString(texto, repeticiones);
 
 function reverseString (texto){
-    console.log(texto.split("").reverse().join(""));
+    texto = texto.split("").reverse().join("");
+    const p = document.createElement("p");
+    p.textContent = texto;
+    document.body.appendChild(p);
 }
 
 let texto2 = prompt("Ingrese un texto");
@@ -35,7 +41,12 @@ function getTheTitles(books) {
     for (let book of books){
         titles.push(book.title);
     }
-    console.log(titles);
+    for (let title of titles){
+        const h1 = document.createElement("h1");
+        h1.textContent = title;
+        document.body.appendChild(h1);
+    }
+    return titles;
 }
 
 let booksInput = prompt("Ingrese un arreglo de objetos con los campos title y author separados por comas");
@@ -48,7 +59,14 @@ getTheTitles(books);
 function getOdds(nums) {
     let numsArray = nums.split(",").map(Number);
     let odds = numsArray.filter(num => num % 2 !== 0);
-    console.log(odds);
+    const p = document.createElement("p");
+    p.textContent = odds;
+
+    p.style.color = "purple";
+    p.style.fontSize = "16px";
+
+    document.body.appendChild(p);
+    return odds
 }
 
 let nums = prompt("Ingrese un arreglo de números separados por comas");
@@ -57,20 +75,22 @@ getOdds(nums);
 
 function duplicates(nums) {
     let numsArray = nums.split(",").map(Number);
-    let count = {};
-    let duplicates = 0;
+    let countMap = {};
 
     for (let num of numsArray) {
-        count[num] = (count[num] || 0) + 1;
+        countMap[num] = (countMap[num] || 0) + 1;
     }
 
-    for (let key in count) {
-        if (count[key] > 1) {
-            duplicates++;
+    for (const [num, count] of Object.entries(countMap)) {
+        if (count > 1) {
+            const h4 = document.createElement("h4");
+            h4.textContent = `Valor duplicado: ${num}`;
+            const p = document.createElement("p");
+            p.textContent = `Número de duplicados: ${count}`;
+            document.body.appendChild(h4);
+            document.body.appendChild(p);
         }
     }
-
-    console.log(duplicates);
 }
 
 let nums3 = prompt("Ingrese un arreglo de números separados por comas");
@@ -87,7 +107,9 @@ function sumAll(a, b) {
         a++;
         suma += a;
     }
-    console.log(suma);
+    const p = document.createElement("p");
+    p.textContent = `Suma: ${suma}`;
+    document.body.appendChild(p);
 }
 
 let a = prompt("Ingrese el primer número del rango");
@@ -100,7 +122,7 @@ sumAll(a, b);
 function convertToCelsius(temp) {
     temp = parseFloat(temp);
     temp = (temp - 32) * 5/9;
-    console.log(temp.toFixed(1));
+    console.log(`Farenheit a Celsius: ${temp.toFixed(1)}`);
 }
 
 let temp = prompt("Ingrese la temperatura en Farenheit");
@@ -110,7 +132,7 @@ convertToCelsius(temp);
 function convertToFarenheit(temp) {
     temp = parseFloat(temp);
     temp = temp * 9/5 + 32;
-    console.log(temp.toFixed(1));
+    console.log(`Celsius a Farenheit: ${temp.toFixed(1)}`);
 }
 
 let temp2 = prompt("Ingrese la temperatura en Celsius");
@@ -122,9 +144,9 @@ convertToFarenheit(temp2);
 function leapYears(año) {
     año = parseInt(año);
     if (año % 4 == 0 && año % 100 != 0 || año % 400 == 0) {
-        console.log(true);
+        console.log(`${año} es bisiesto? `+ true);
     } else {
-        console.log(false);
+        console.log(`${año} es bisiesto? `+false);
     }
 }
 
@@ -137,7 +159,7 @@ leapYears(año);
 function getSum(nums) {
     let numsArray = nums.split(",").map(Number);
     let sum = numsArray.reduce((acc, num) => acc + num, 0);
-    console.log(sum);
+    console.log(`Suma: ${sum}`);
 }
 
 let nums2 = prompt("Ingrese un arreglo de números separados por comas");
@@ -147,15 +169,28 @@ getSum(nums2);
 // GENERACIÓN DE CONTRASEÑAS
 
 function generatePassword(length) {
-    var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const minLength = 8;
+    length = Math.max(length, minLength);
+
+    const upperCaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const lowerCaseChars = 'abcdefghijklmnopqrstuvwxyz';
+    const numbers = '0123456789';
+    const specialChars = '!@#$%^&*()-_=+[]{}|;:,.<>?';
+
     var password = "";
-    for (var i = 0; i < length; i++) {
-        password += charset.charAt(Math.floor(Math.random() * charset.length));
+    password += upperCaseChars.charAt(Math.floor(Math.random() * upperCaseChars.length));
+    password += lowerCaseChars.charAt(Math.floor(Math.random() * lowerCaseChars.length));
+    password += numbers.charAt(Math.floor(Math.random() * numbers.length));
+    password += specialChars.charAt(Math.floor(Math.random() * specialChars.length));
+
+    const allChars = upperCaseChars + lowerCaseChars + numbers + specialChars;
+    for (let i = password.length; i < length; i++) {
+        password += allChars.charAt(Math.floor(Math.random() * allChars.length));
     }
-    console.log(password);
+    console.log(password.split('').sort(() => Math.random() - 0.5).join(''));
 }
 
-let length = parseInt(prompt("Ingrese la longitud de la contraseña"));
+let length = parseInt(prompt("Ingrese la longitud de la contraseña (mayor a 8 o se tomará como 8)"));
 generatePassword(length); 
 generatePassword(length);
 

@@ -28,6 +28,7 @@ document.getElementById("submit2").addEventListener("click", function() {
 
 function removeFromArray ( arreglo, item){
     arreglo=arreglo.filter((element)=>element!==item);
+    console.log("tarea 3")
     console.log(arreglo);
 }
 
@@ -35,6 +36,7 @@ removeFromArray(["hola","chau","buenas"], "chau");
 
 function getTheTitles(books) {
     let titles = [];
+    document.body.appendChild(document.createElement("p")).textContent = "Tarea 4";
     for (book of books){
         titles.push(book.title);
     }
@@ -70,6 +72,7 @@ getTheTitles(books);
 // FILTRADO Y TRANSFORMACIÓN
 
 function getOdds(nums) {
+    document.body.appendChild(document.createElement("p")).textContent = "Tarea 5";
     let odds = nums.filter((num) => num % 2 !== 0);
     const p = document.createElement("p");
     p.textContent = odds;
@@ -84,6 +87,7 @@ function getOdds(nums) {
 getOdds([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]); // [1, 3, 5, 7, 9]
 
 function duplicates(nums) {
+    document.body.appendChild(document.createElement("p")).textContent = "Tarea 6";
     let countMap = {};
 
     for (let num of nums) {

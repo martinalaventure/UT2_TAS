@@ -22,6 +22,7 @@ function generatePassword(length) {
     console.log(password.split('').sort(() => Math.random() - 0.5).join(''));
 }
 
+console.log("Tarea 1");
 generatePassword(12); 
 generatePassword(4);
 
@@ -35,6 +36,7 @@ function findTheOldest(people){
             oldest = person;
         }
     }
+    console.log("Tarea 2");
     console.log(oldest);
     return oldest;
 }

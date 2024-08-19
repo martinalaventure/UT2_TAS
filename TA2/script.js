@@ -17,6 +17,7 @@ sumAll(1, 4); // 10
 
 function convertToCelsius(temp) {
     temp = (temp - 32) * 5/9;
+    console.log("Tarea 2")
     console.log(`Farenheit a Celsius: ${temp.toFixed(1)}`);
 }
 
@@ -32,6 +33,7 @@ convertToFarenheit(34); // 93.2
 // DETERMINACIÓN DE AÑO BICIESTO
 
 function leapYears(año) {
+    console.log("Tarea 3")
     if (año % 4 == 0 && año % 100 != 0 || año % 400 == 0) {
         console.log(`${año} es bisiesto? `+ true);
     } else {
@@ -44,6 +46,7 @@ leapYears(2020); // true
 // SUMA DE ELEMENTOS DE UN ARREGLO
 
 function getSum(nums) {
+    console.log("Tarea 4")
     let sum = nums.reduce((acc, num) => acc + num, 0);
     console.log(`Suma: ${sum}`);
 }
